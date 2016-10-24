@@ -1,0 +1,24 @@
+{
+  "name": "bamazonapp",
+  "version": "1.0.0",
+  "description": "app to maintain products info",
+  "main": "BamazonManager.js",
+  "dependencies": {
+    "inquirer": "^1.2.2",
+    "mysql": "^2.11.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/annieg11/mysqlNode-app.git"
+  },
+  "author": "Annie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/annieg11/mysqlNode-app/issues"
+  },
+  "homepage": "https://github.com/annieg11/mysqlNode-app#readme"
+}
