@@ -47,52 +47,62 @@ var viewProduct = function() {
         type: "input",
         message: "Which Product would you like to search for?"
     }).then(function(answer) {
-        var query = 'SELECT ProductName FROM Products WHERE ?'
-        connection.query(query, {ProductName: answer.ProductName}, function(err, res) {
-            for (var i = 0; i < res.length; i++) {
-                console.log("ID: " + res[i].ID+ " || ProductName: " + res[i].ProductName + " || DepartmentName: " + res[i].DepartmentName + " || Price: " + res[i].Price + " || StockQuantity: " + res[i].StockQuantity);
+        var query = 'SELECT * FROM Products';
+        connection.query(query,function(err, res) {
+            // console.log(res);
+            for (var i = 0; i < res.length; i++) { 
+                console.log("ID: " + res[i].ID + " || Product Name: " + res[i].ProductName + " || Department Name: " + res[i].DepartmentName + " || Price: " + res[i].Price + " || Stock Quantity: " + res[i].StockQuantity);
             }
             doSearch();
         })
     })
 };
 
- var viewLowInventory = function() {
-     var query = 'SELECT ProductName FROM Products GROUP BY ProductName HAVING count(*) > 5';
-     connection.query(query, function(err, res) {
-         for (var i = 0; i < res.length; i++) {
-            console.log(res[i].ProductName);
+  var viewLowInventory = function() {
+    inquirer.prompt({
+         name: "ProductName",
+         type: "input",
+         message: "Which Product Inventory would you like to check?"
+     }).then(function(answer) {
+      var query = 'SELECT ProductName FROM Products GROUP BY StockQuantity HAVING count(*) > 5';
+      connection.query(query, function(err, res) {
+          for (var i = 0; i < res.length; i++) {
+             console.log(res[i].ProductName);
+          }
+         doSearch();
+      })
+    })
+
+  };
+  
+ var addInventory = function() {
+     inquirer.prompt([{
+        name: "ProductName",
+        type: "input",
+        message: "Update Quantity To : " 
+         }]).then(function(answer) {
+         connection.query('UPDATE Products SET ? WHERE ?',[{StockQuantity: answer.StockQuantity},{ProductName:answer.ProductName}], function(err, res) {
+             for (var i = 0; i < res.length; i++) {
+            console.log("ID: " + res[i].ID + " || ProductName: " + res[i].ProductName + " || DepartmentName: " + res[i].DepartmentName + " || Price: " + res[i].Price + " || StockQuantity: " + res[i].StockQuantity);
          }
-        doSearch();
+            doSearch();
+         })
      })
  };
 
-var addInventory = function() {
-    inquirer.prompt([{
-        name: "ProductName",
-        type: "input",
-        message: "Update Quantity To Inventory: " 
-        }]).then(function(answer) {
-        connection.query('UPDATE Products SET ? WHERE  ?', {ID: answer.ID,ProductName: answer.ProductName,DepartmentName: answer.DepartmentName,Price: answer.Price,StockQuantity: answer.StockQuantity}, function(err, res) {
-            for (var i = 0; i < res.length; i++) {
-            console.log("ID: " + res[i].ID + " || ProductName: " + res[i].ProductName + " || DepartmentName: " + res[i].DepartmentName + " || Price: " + res[i].Price + " || StockQuantity: " + res[i].StockQuantity);
-        }
-            doSearch();
-        })
-    })
-};
-
-var addNewProduct = function() {
-    inquirer.prompt({
-        name: "ProductName",
-        type: "input",
-        message: "Add the Product: "
-    }).then(function(answer) {
-        console.log(answer.ProductName)
-        connection.query('INSERT INTO Products SET ?', {ID: answer.ID,ProductName: answer.ProductName,DepartmentName: answer.DepartmentName,Price: answer.Price,StockQuantity: answer.StockQuantity}, function(err, res) {
-            console.log("ID: " + res[0].ID + " || ProductName: " + res[0].ProductName + " || DepartmentName: " + res[0].DepartmentName + " || Price: " + res[0].Price + " || StockQuantity: " + res[0].StockQuantity);
-            doSearch();
-        })
-    })
-};
+ var addNewProduct = function() {
+     inquirer.prompt({
+         name: "ProductName",
+         type: "input",
+         message: "Add the Product: "
+     }).then(function(answer) {
+         // console.log(answer.ProductName)
+         connection.query('INSERT INTO Products SET ?',[{ProductName: answer.ProductName},{DepartmentName: answer.DepartmentName},{Price: answer.Price},{StockQuantity: answer.StockQuantity}], function(err, res) {
+              for (var i = 0; i < res.length; i++) {
+             console.log("ID: " + res[0].ID + " || ProductName: " + res[0].ProductName + " || DepartmentName: " + res[0].DepartmentName + " || Price: " + res[0].Price + " || StockQuantity: " + res[0].StockQuantity);
+             }
+             doSearch();
+         })
+     })
+ };
 
