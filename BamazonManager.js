@@ -64,9 +64,11 @@ var viewProduct = function() {
          type: "input",
          message: "Which Product Inventory would you like to check?"
      }).then(function(answer) {
-      var query = 'SELECT ProductName FROM Products GROUP BY StockQuantity HAVING count(*) > 5';
+      // var query = 'SELECT ProductName FROM Products GROUP BY StockQuantity HAVING count(*) > 5';
+      var query = 'SELECT ProductName FROM Products Where StockQuantity < 5';
       connection.query(query, function(err, res) {
           for (var i = 0; i < res.length; i++) {
+
              console.log(res[i].ProductName);
           }
          doSearch();
@@ -74,7 +76,7 @@ var viewProduct = function() {
     })
 
   };
-  
+
  var addInventory = function() {
      inquirer.prompt([{
         name: "ProductName",

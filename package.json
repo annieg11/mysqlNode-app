@@ -5,6 +5,7 @@
   "main": "BamazonManager.js",
   "dependencies": {
     "inquirer": "^1.2.2",
+    "msql": "^1.0.3",
     "mysql": "^2.11.1"
   },
   "devDependencies": {},
