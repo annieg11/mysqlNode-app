@@ -57,7 +57,7 @@ var viewProduct = function() {
         connection.query(query,function(err, res) {
             // console.log(res);
             for (var i = 0; i < res.length; i++) { 
-                console.log("ID: " + res[i].ID + " || Product Name: " + res[i].ProductName + " || Department Name: " + res[i].DepartmentName + " || Price: " + res[i].Price + " || Stock Quantity: " + res[i].StockQuantity);
+                console.log("Item ID: " + res[i].ItemID + " || Product Name: " + res[i].ProductName + " || Department Name: " + res[i].DepartmentName + " || Price: " + res[i].Price + " || Stock Quantity: " + res[i].StockQuantity);
             }
             doSearch();
         })
@@ -98,7 +98,7 @@ var viewProduct = function() {
          connection.query('UPDATE Products SET ? WHERE ?',[{StockQuantity: answer.ProductStock},{ProductName:answer.ProductName}], function(err, res) {
             if (err) throw err;
             for (var i = 0; i < res.length; i++) {
-            console.log("ID: " + res[i].ID + " || ProductName: " + res[i].ProductName + " || DepartmentName: " + res[i].DepartmentName + " || Price: " + res[i].Price + " || StockQuantity: " + res[i].StockQuantity);
+            console.log("Item ID: " + res[i].ItemID + " || ProductName: " + res[i].ProductName + " || DepartmentName: " + res[i].DepartmentName + " || Price: " + res[i].Price + " || StockQuantity: " + res[i].StockQuantity);
          }
             doSearch();
          })
@@ -133,7 +133,7 @@ var viewProduct = function() {
          connection.query('INSERT INTO Products SET ?', {ProductName: answer.ProductName, DepartmentName: answer.DepartmentName, Price: answer.Price, StockQuantity: answer.StockQuantity}, function(err, res) {
              if (err) throw err;
               for (var i = 0; i < res.length; i++) {
-             console.log("ID: " + res[0].ID + " || ProductName: " + res[0].ProductName + " || DepartmentName: " + res[0].DepartmentName + " || Price: " + res[0].Price + " || StockQuantity: " + res[0].StockQuantity);
+             console.log("Item ID: " + res[0].ItemID + " || Product Name: " + res[0].ProductName + " || Department Name: " + res[0].DepartmentName + " || Price: " + res[0].Price + " || StockQuantity: " + res[0].StockQuantity);
              }
              doSearch();
          })
