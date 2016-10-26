@@ -1,6 +1,6 @@
 CREATE DATABASE Bamazon;
 
-USE bamazon;
+USE Bamazon;
 
 CREATE TABLE Products(
   ItemID INT AUTO_INCREMENT NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE Products(
     primary key(ItemID)
 );
 
-select * from products;
+select * from Products;
 
 INSERT INTO products(ProductName,DepartmentName,Price,StockQuantity)
 VALUES ("Uncharted 4","Video Games",49.95,150),
