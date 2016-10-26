@@ -1,8 +1,8 @@
-CREATE DATABASE bamazon;
+CREATE DATABASE Bamazon;
 
 USE bamazon;
 
-CREATE TABLE products(
+CREATE TABLE Products(
   ItemID INT AUTO_INCREMENT NOT NULL,
     ProductName VARCHAR(45) NOT NULL,
     DepartmentName VARCHAR(45) NOT NULL,
